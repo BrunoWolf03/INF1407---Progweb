@@ -26,7 +26,9 @@ SECRET_KEY = "django-insecure-13o)3oa6%#iu=i%i)u8_k8vw-e0sjp_893=*3y&j$e!v)j0f2d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost',
+    '127.0.0.1',
+    'humble-space-engine-gvwj7xx6jx6fwq5q-8000.app.github.dev',]
 
 
 # Application definition
@@ -81,6 +83,11 @@ DATABASES = {
     }
 }
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://humble-space-engine-gvwj7xx6jx6fwq5q-8000.app.github.dev',
+    'https://localhost:8000',
+]
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -122,3 +129,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CSRF_COOKIE_SECURE = True

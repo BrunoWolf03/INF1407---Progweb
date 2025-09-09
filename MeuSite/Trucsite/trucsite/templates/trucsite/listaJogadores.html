@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Lista Jogadores</title>
+<link rel="stylesheet" href="{% static 'jogadores/css/estilo.css' %}">
+</head>
+<body>
+ {% include 'trucsite/links.html' %}
+ <h1>Lista de Jogadores</h1>
+ <table>
+ <tr><th>Nome</th><th>Curso</th><th>Periodo</th><th>Ações disponíveis</th></tr>
+ {% for Jogador in contexto %}
+ <tr>
+ <td>{{ Jogador.nome }}</td><td>{{Jogador.curso }}</td><td>{{ Jogador.periodo }}</td>
+ <td><a href="{% url 'trucsite:atualiza-contato' pk=Jogador.id %}">Atualizar</a> |
+ <a href="{% url 'trucsite:apaga-contato' pk=Jogador.id %}">Excluir</a></td>
+ </tr>
+ {% empty %}
+ <tr><th colspan="5">Ainda não tem contatos cadastrados</th></tr>
+ {% endfor %}
+ </table>
+</body>
+</html>

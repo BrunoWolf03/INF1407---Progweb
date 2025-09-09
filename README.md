@@ -1,13 +1,13 @@
-# INF1407---Progweb
+# Trabalho 1 INF1407 - Trucsite
 
-## Comando para buildar o docker:
+### O Trucsite é uma aplicação web feita para salvar as estasticas de truco da PUC-Rio. Criado especialmente para o jogo truco, o site permite cadastrar jogadores, registrar partidas e acompanhar o desempenho de todos ao longo do tempo.
 
-sudo docker-compose up --build
+#### Para instalar as bibliotecas necessarias
+- cd MeuSite
+- pip install -r requirements.txt 
 
-após isso é preciso clicar na opção "portas" e acessar o link via browser. 
+#### Para rodar o servidor
+- cd Trucsite
+- python manage.py runserver
 
-Trucsite é o projeto e trucsite é o app
 
-adm
-
-adm123

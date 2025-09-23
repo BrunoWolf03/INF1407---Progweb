@@ -1,0 +1,22 @@
+services:
+  web:
+    build: .
+    command: >
+      bash -lc "
+      python manage.py migrate &&
+      python manage.py collectstatic --noinput &&
+      gunicorn TrucSite.wsgi:application --bind 0.0.0.0:8000
+      "
+    # Se ainda quiser variáveis do Django, mantenha um .env
+    env_file: .env
+    volumes:
+      - .:/app                  # hot-reload do código em dev
+      - ./data:/app/data        # <- db.sqlite3, db.sqlite3-wal, db.sqlite3-shm
+      - staticfiles:/app/staticfiles
+      - media:/app/media
+    ports:
+      - "8000:8000"
+
+volumes:
+  staticfiles:
+  media:

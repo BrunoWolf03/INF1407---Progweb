@@ -1,0 +1,19 @@
+<!-- core/templates/core/jogador_detail.html -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>{{ jogador.nome }}</title></head>
+<body>
+  <h1>{{ jogador.nome }}</h1>
+  <p>Curso: {{ jogador.curso }} — Período: {{ jogador.periodo }}</p>
+  <p>Email: {{ jogador.email }}</p>
+  <p>Vitórias: {{ jogador.vitorias }} — Derrotas: {{ jogador.derrotas }}</p>
+  <p>Data de Nascimento: {{ jogador.dtNasc|date:"d/m/Y" }}</p>
+  {% if jogador.imagem %}
+    <p><img src="{{ jogador.imagem.url }}" alt="{{ jogador.nome }}" style="max-width:250px"></p>
+  {% endif %}
+  <p>
+    <a href="{% url 'core:jogador_update' jogador.pk %}">Editar</a> |
+    <a href="{% url 'core:jogador_list' %}">Voltar</a>
+  </p>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!-- core/templates/core/jogador_form.html -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Formulário Jogador</title></head>
+<body>
+  <h1>{{ view.object|default:'Novo Jogador' }}</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar</button>
+    <a href="{% url 'core:jogador_list' %}">Cancelar</a>
+  </form>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!-- core/templates/core/jogador_list.html -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Jogadores</title></head>
+<body>
+  <h1>Jogadores</h1>
+  <p><a href="{% url 'core:jogador_create' %}">Novo Jogador</a></p>
+  <ul>
+    {% for j in jogadores %}
+      <li>
+        <a href="{% url 'core:jogador_detail' j.pk %}">{{ j.nome }}</a>
+        — {{ j.curso }} ({{ j.periodo }}º)
+        — Vitórias: {{ j.vitorias }} / Derrotas: {{ j.derrotas }}
+        — <a href="{% url 'core:jogador_update' j.pk %}">Editar</a>
+        — <a href="{% url 'core:jogador_delete' j.pk %}">Remover</a>
+      </li>
+    {% empty %}
+      <li>Nenhum jogador cadastrado.</li>
+    {% endfor %}
+  </ul>
+
+  {% if is_paginated %}
+    <div>
+      {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">« Anterior</a>{% endif %}
+      <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+      {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Próxima »</a>{% endif %}
+    </div>
+  {% endif %}
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Truco App - Home</title>
+  <link rel='stylesheet' href="{% static 'css/home.css' %}" type="text/css">
+</head>
+<body>
+
+  <header>
+    <h1>Truco App</h1>
+    <p>Gerencie jogadores e descubra quem é o rei do baralho!</p>
+  </header>
+
+  <main>
+    <!-- Novo Jogador -->
+    <div class="card" style="text-align:center;">
+      <h2>➕ Novo Jogador</h2>
+      <p>Cadastre novos jogadores para participar das partidas.</p>
+      <a href="{% url 'core:jogador_create' %}" class="btn">Cadastrar</a>
+    </div>
+
+    <!-- Ranking -->
+    <div class="card">
+      <h2>🏆 Ranking de Jogadores 🏆</h2> 
+      <ul>
+        {% for jogador in ranking %}
+          <li>{{ forloop.counter }}º - {{ jogador.nome }} ({{ jogador.vitorias }} vitórias)</li>
+        {% empty %}
+          <li>Nenhum jogador cadastrado ainda.</li>
+        {% endfor %}
+      </ul>
+      <a href="{% url 'core:jogador_list' %}" class="btn">Ver todos os jogadores</a>
+    </div>
+  </main>
+
+</body>
+</html>

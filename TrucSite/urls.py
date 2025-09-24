@@ -20,6 +20,6 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", RedirectView.as_view(pattern_name="core:jogador_list", permanent=False)),
-    path("", include("core.urls", namespace="core")),
+    path("", RedirectView.as_view(pattern_name="home", permanent=False), name="root"),
+    path("", include("core.urls")),
 ]

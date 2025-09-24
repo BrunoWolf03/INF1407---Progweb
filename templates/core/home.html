@@ -8,18 +8,27 @@
   <link rel='stylesheet' href="{% static 'css/home.css' %}" type="text/css">
 </head>
 <body>
-
-  <header>
+<header>
     <h1>Truco App</h1>
     <p>Gerencie jogadores e descubra quem é o rei do baralho!</p>
-  </header>
+      <nav>
+      {% if request.user.is_authenticated %}
+        <span>Olá, {{ request.user.username }}!</span>
+
+        <a href="{% url 'admin:index' %}">Admin</a>
+      {% else %}
+        <a href="{% url 'login' %}">Entrar</a>
+        <a href="{% url 'signup' %}">Cadastrar</a>
+      {% endif %}
+    </nav>
+</header>
 
   <main>
     <!-- Novo Jogador -->
     <div class="card" style="text-align:center;">
       <h2>➕ Novo Jogador</h2>
       <p>Cadastre novos jogadores para participar das partidas.</p>
-      <a href="{% url 'core:jogador_create' %}" class="btn">Cadastrar</a>
+      <a href="{% url 'jogador_create' %}" class="btn">Cadastrar</a>
     </div>
 
     <!-- Ranking -->
@@ -32,7 +41,7 @@
           <li>Nenhum jogador cadastrado ainda.</li>
         {% endfor %}
       </ul>
-      <a href="{% url 'core:jogador_list' %}" class="btn">Ver todos os jogadores</a>
+      <a href="{% url 'jogador_list' %}" class="btn">Ver todos os jogadores</a>
     </div>
   </main>
 

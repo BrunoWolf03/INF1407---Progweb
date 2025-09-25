@@ -1,4 +1,10 @@
+{% load static %}
 {# {% extends "base.html" %} #}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}" type="text/css">
+{% endblock %}
+
 {% block content %}
 <h1>Criar conta</h1>
 <form method="post" novalidate>

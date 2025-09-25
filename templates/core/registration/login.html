@@ -1,4 +1,10 @@
+{% load static %}
 {# {% extends "base.html" %} #}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}" type="text/css">
+{% endblock %}
+
 {% block content %}
 <h1>Entrar</h1>
 <form method="post" novalidate>
@@ -7,6 +13,7 @@
   {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
   <button type="submit">Login</button>
 </form>
+
 {# <p><a href="{% url 'password_reset' %}">Esqueci minha senha</a></p> #}
 <p>Não tem conta? <a href="{% url 'signup' %}">Cadastre-se</a></p>
 {% endblock %}

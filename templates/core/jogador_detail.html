@@ -12,8 +12,8 @@
     <p><img src="{{ jogador.imagem.url }}" alt="{{ jogador.nome }}" style="max-width:250px"></p>
   {% endif %}
   <p>
-    <a href="{% url 'core:jogador_update' jogador.pk %}">Editar</a> |
-    <a href="{% url 'core:jogador_list' %}">Voltar</a>
+    <a href="{% url 'jogador_update' jogador.pk %}">Editar</a> |
+    <a href="{% url 'jogador_list' %}">Voltar</a>
   </p>
 </body>
 </html>

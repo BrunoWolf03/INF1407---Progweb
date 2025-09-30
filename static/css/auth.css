@@ -1,3 +1,21 @@
+.auth-container form p {
+  margin: 0;          /* remove margem padrão */
+  padding: 0;         /* remove padding */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;       /* espaçamento entre label e input */
+}
+
+.auth-container form label {
+  text-align: left;   /* deixa o texto do label alinhado à esquerda */
+  font-weight: bold;
+}
+
+.auth-container form input {
+  width: 100%;        /* faz o input ocupar toda a largura do container */
+  box-sizing: border-box; /* evita overflow */
+}
+
 .auth-container {
   max-width: 420px;
   margin: 5rem auto;
@@ -45,3 +63,4 @@
   text-align: center;
   margin-top: 1rem;
 }
+

@@ -6,11 +6,13 @@
 {% endblock %}
 
 {% block content %}
-<h1>Criar conta</h1>
-<form method="post" novalidate>
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Cadastrar</button>
-</form>
-<p>Já tem conta? <a href="{% url 'login' %}">Entrar</a></p>
+<div class="auth-container">
+  <h1>Criar conta</h1>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Cadastrar</button>
+  </form>
+  <p>Já tem conta? <a href="{% url 'login' %}">Entrar</a></p>
+</div>
 {% endblock %}

@@ -7,7 +7,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Jogador
 from .forms import JogadorForm
 from django.contrib.auth import views as auth_views
-
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 class JogadorListView(ListView):
     model = Jogador
@@ -69,3 +70,6 @@ class LoginView(auth_views.LoginView):
         remember = self.request.POST.get("remember")
         self.request.session.set_expiry(60*60*24*14 if remember else 0)
         return response
+
+class LogoutView(auth_views.LogoutView):
+    next_page = reverse_lazy("home")

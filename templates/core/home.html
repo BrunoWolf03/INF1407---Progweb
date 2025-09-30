@@ -11,19 +11,23 @@
 <header>
     <h1>Truco App</h1>
     <p>Gerencie jogadores e descubra quem é o rei do baralho!</p>
-      <nav>
+    
+    <nav class="user-nav">
       {% if request.user.is_authenticated %}
-        <span>Olá, {{ request.user.username }}!</span>
-
-        <a href="{% url 'admin:index' %}">Admin</a>
+        <span class="username">Olá, {{ request.user.username }}!</span>
+        <a href="{% url 'admin:index' %}" class="nav-btn">Admin</a>
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit" class="nav-btn">Sair</button>
+        </form>
       {% else %}
-        <a href="{% url 'login' %}">Entrar</a>
-        <a href="{% url 'signup' %}">Cadastrar</a>
+        <a href="{% url 'login' %}" class="nav-btn">Entrar</a>
+        <a href="{% url 'signup' %}" class="nav-btn">Cadastrar</a>
       {% endif %}
     </nav>
 </header>
 
-  <main>
+<main>
     <!-- Novo Jogador -->
     <div class="card" style="text-align:center;">
       <h2>➕ Novo Jogador</h2>
@@ -43,7 +47,6 @@
       </ul>
       <a href="{% url 'jogador_list' %}" class="btn">Ver todos os jogadores</a>
     </div>
-  </main>
-
+</main>
 </body>
 </html>

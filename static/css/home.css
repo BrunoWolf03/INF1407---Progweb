@@ -5,10 +5,10 @@ header {
   align-items: center;            /* centraliza verticalmente */
   padding: 0 1rem;
   height: 60px;
-  background: transparent;
   border-bottom: 2px solid #ddd;
   width: 100%;
   box-sizing: border-box;
+  background: #228B22; 
 }
 
 body {
@@ -42,7 +42,7 @@ main {
 
 .btn {
   display: inline-block;
-  background: #006400;
+  background: #228B22;
   color: white;
   padding: 0.8rem 1.2rem;
   border-radius: 8px;
@@ -76,7 +76,7 @@ li:last-child {
 }
 
 .logo-home img {
-  max-height: 40px;
+  max-height: 150px;
   width: auto;
   display: block;
 }
@@ -91,11 +91,11 @@ li:last-child {
 
 .user-nav .username {
   font-weight: bold;
-  color: #333;
+  color: white
 }
 
 .user-nav .nav-btn {
-  background: #228B22;
+  background: #4cd34cd2;
   color: white;
   padding: 0.4rem 0.8rem;
   border-radius: 6px;

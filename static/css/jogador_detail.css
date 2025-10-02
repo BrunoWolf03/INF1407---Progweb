@@ -1,0 +1,90 @@
+/* jogador.css */
+
+/* Body centralizado e com fundo suave */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f4f9;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Título do jogador */
+h1 {
+  color: #006400;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Parágrafos de informação */
+p {
+  background: white;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 500px;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+/* Imagem do jogador */
+img {
+  display: block;
+  max-width: 250px;
+  width: 100%;
+  height: auto;
+  margin: 1rem auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Links Editar / Voltar */
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: #006400;
+  font-weight: bold;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #006400;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+a:hover {
+  background: #228B22;
+  color: white;
+  text-decoration: none;
+}
+
+/* Container geral (opcional se quiser centralizar tudo melhor) */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;            
+  padding: 0 1rem;
+  height: 60px;
+  border-bottom: 2px solid #ddd;
+  width: 100%;
+  box-sizing: border-box;
+  background: #228B22; 
+}
+
+
+.logo-home {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.logo-home img {
+  max-height: 150px;
+  width: auto;
+  display: block;
+}

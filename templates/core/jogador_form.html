@@ -6,6 +6,15 @@
   <title>Formulário Jogador</title>
   <link rel="stylesheet" href="{% static 'css/jogador_form.css' %}" type="text/css">
 </head>
+
+<header>
+
+<a href="{% url 'home' %}" class="logo-home">
+<img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
+</a>
+
+</header>
+
 <body>
   <div class="form-container">
     <h1>{{ view.object|default:"Novo Jogador" }}</h1>

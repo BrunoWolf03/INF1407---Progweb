@@ -7,56 +7,92 @@
   <link rel="stylesheet" href="{% static 'css/jogador_list.css' %}" type="text/css">
 </head>
 
-<header>
-
-    <a href="{% url 'home' %}" class="logo-home">
-        <img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
-          </a>
-          <h1> Jogadores Cadastrados</h1>
-          </header>
-
 <body>
+<header>
+  <a href="{% url 'home' %}" class="logo-home">
+    <img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
+  </a>
+  <h1>Jogadores Cadastrados</h1>
+</header>
 
+<p><a href="{% url 'jogador_create' %}">Novo Jogador</a></p>
 
-  <p><a href="{% url 'jogador_create' %}">Novo Jogador</a></p>
+<ul>
+  {% for j in jogadores %}
+    <li>
+      <div class="player-card">
+        {% if j.imagem %}
+          <img src="{{ j.imagem.url }}" alt="{{ j.nome }}" class="player-img">
+        {% else %}
+          <img src="{% static 'img/defaultavatar.png' %}" alt="Sem foto" class="player-img">
+        {% endif %}
 
-  <ul>
-    {% for j in jogadores %}
-      <li>
-        <div class="player-card">
-          {% if j.imagem %}
-            <img src="{{ j.imagem.url }}" alt="{{ j.nome }}" class="player-img">
-          {% else %}
-            <img src="{% static 'img/defaultavatar.png' %}" alt="Sem foto" class="player-img">
-          {% endif %}
+        <div class="player-info">
+          <a href="{% url 'jogador_detail' j.pk %}">{{ j.nome }}</a>
+          <span>{{ j.curso }} ({{ j.periodo }}º)</span>
+          <span>Vitórias: {{ j.vitorias }} / Derrotas: {{ j.derrotas }}</span>
 
-          <div class="player-info">
-            <a href="{% url 'jogador_detail' j.pk %}">{{ j.nome }}</a>
-            <span>{{ j.curso }} ({{ j.periodo }}º)</span>
-            <span>Vitórias: {{ j.vitorias }} / Derrotas: {{ j.derrotas }}</span>
-
-            <div class="actions">
-              <a href="{% url 'jogador_update' j.pk %}">Editar</a>
-              <a href="{% url 'jogador_delete' j.pk %}">Remover</a>
-            </div>
+          <div class="actions">
+            <a href="{% url 'jogador_update' j.pk %}">Editar</a>
+            <button type="button" class="btn-remove" data-url="{% url 'jogador_delete' j.pk %}">Remover</button>
           </div>
         </div>
-      </li>
-    {% empty %}
-      <li>Nenhum jogador cadastrado.</li>
-    {% endfor %}
-  </ul>
+      </div>
+    </li>
+  {% empty %}
+    <li>Nenhum jogador cadastrado.</li>
+  {% endfor %}
+</ul>
 
-  {% if is_paginated %}
-    <div class="pagination">
-      {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}">« Anterior</a>
-      {% endif %}
-      <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
-      {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}">Próxima »</a>
-      {% endif %}
-    </div>
-  {% endif %}
+{% if is_paginated %}
+  <div class="pagination">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">« Anterior</a>
+    {% endif %}
+    <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">Próxima »</a>
+    {% endif %}
+  </div>
+{% endif %}
+
+<!-- Modal de deleção -->
+<div id="modal-delete" class="modal">
+  <div class="modal-content">
+    <h2>Remover jogador?</h2>
+    <form id="delete-form" method="post">
+      {% csrf_token %}
+      <button type="submit" class="confirm-btn">Confirmar</button>
+      <button type="button" class="cancel-btn">Cancelar</button>
+    </form>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('modal-delete');
+  const deleteForm = document.getElementById('delete-form');
+
+  // Botões “Remover”
+  document.querySelectorAll('.btn-remove').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const url = btn.getAttribute('data-url');
+      deleteForm.setAttribute('action', url);
+      modal.style.display = 'flex';
+    });
+  });
+
+  // Botão “Cancelar”
+  document.querySelector('.cancel-btn').addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  // Fecha modal se clicar fora da caixa
+  window.addEventListener('click', e => {
+    if (e.target === modal) modal.style.display = 'none';
+  });
+});
+</script>
+
 </body>
 </html>

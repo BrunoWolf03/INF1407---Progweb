@@ -1,16 +1,20 @@
-{% load static %}
-{# {% extends "base.html" %} #}
-<link rel="stylesheet" href="{% static 'css/auth.css' %}" type="text/css">
+{% extends "core/base.html" %}
+{% block title %}Truco App - Login{% endblock %}
 
-<div class="auth-container">
-  <h1>Entrar</h1>
-  <form method="post" novalidate>
-    {% csrf_token %}
-    {{ form.as_p }}
-    {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
-    <button type="submit">Login</button>
-  </form>
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}" type="text/css">
 
-  {# <p><a href="{% url 'password_reset' %}">Esqueci minha senha</a></p> #}
-  <p>Não tem conta? <a href="{% url 'signup' %}">Cadastre-se</a></p>
-</div>
+    <div class="auth-container">
+      <h1>Entrar</h1>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+        <button type="submit">Login</button>
+      </form>
+
+      <p><a href="{% url 'password_reset' %}">Esqueci minha senha</a></p>
+      <p>Não tem conta? <a href="{% url 'signup' %}">Cadastre-se</a></p>
+    </div>
+{% endblock %}

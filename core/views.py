@@ -5,10 +5,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from .models import Jogador
-from .forms import JogadorForm
+from .forms import JogadorForm, CustomUserCreationForm
 from django.contrib.auth import views as auth_views
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+from django.conf import settings
 
 class JogadorListView(ListView):
     model = Jogador
@@ -21,25 +22,25 @@ class JogadorDetailView(DetailView):
     template_name = "core/jogador_detail.html"
     context_object_name = "jogador"
 
-class JogadorCreateView(CreateView):
+class JogadorCreateView(LoginRequiredMixin, CreateView):
     model = Jogador
     form_class = JogadorForm
     template_name = "core/jogador_form.html"
     success_url = reverse_lazy("jogador_list")
 
-class JogadorUpdateView(UpdateView):
+class JogadorUpdateView(LoginRequiredMixin, UpdateView):
     model = Jogador
     form_class = JogadorForm
     template_name = "core/jogador_form.html"
     success_url = reverse_lazy("jogador_list")
 
-class JogadorDeleteView(DeleteView):
+class JogadorDeleteView(LoginRequiredMixin, DeleteView):
     model = Jogador
     template_name = "core/jogador_confirm_delete.html"
     success_url = reverse_lazy("jogador_list")
 
 
-class HomeView(LoginRequiredMixin, TemplateView):
+class HomeView(TemplateView):
     template_name = "core/home.html"
 
     def get_context_data(self, **kwargs):
@@ -48,9 +49,9 @@ class HomeView(LoginRequiredMixin, TemplateView):
         return context
         
 class SignUpView(CreateView):
-    form_class = UserCreationForm
+    form_class = CustomUserCreationForm
     template_name = "core/registration/signup.html"
-    success_url = reverse_lazy("login")  # ou faça login automático pós-cadastro
+    success_url = reverse_lazy("login")
 
 class LoginView(auth_views.LoginView):
     template_name = "core/registration/login.html"
@@ -64,3 +65,21 @@ class LoginView(auth_views.LoginView):
 
 class LogoutView(auth_views.LogoutView):
     next_page = reverse_lazy("home")
+
+# ====== Password Reset (4 telas) ======
+class PasswordResetView(auth_views.PasswordResetView):
+    template_name = "core/registration/password_reset_form.html"
+    email_template_name = "core/registration/password_reset_email.html"
+    subject_template_name = "core/registration/password_reset_subject.txt"
+    success_url = reverse_lazy("password_reset_done")
+    from_email = getattr(settings, "DEFAULT_FROM_EMAIL", None)
+
+class PasswordResetDoneView(auth_views.PasswordResetDoneView):
+    template_name = "core/registration/password_reset_done.html"
+
+class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    template_name = "core/registration/password_reset_confirm.html"
+    success_url = reverse_lazy("password_reset_complete")
+
+class PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
+    template_name = "core/registration/password_reset_complete.html"

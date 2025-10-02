@@ -1,18 +1,30 @@
+{% extends "core/base.html" %}
 {% load static %}
-{# {% extends "base.html" %} #}
+{% block title %}Truco App - Cadastrar{% endblock %}
 
-{% block head %}
-<link rel="stylesheet" href="{% static 'css/auth.css' %}" type="text/css">
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}" type="text/css">
 {% endblock %}
 
 {% block content %}
-<div class="auth-container">
-  <h1>Criar conta</h1>
-  <form method="post" novalidate>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Cadastrar</button>
-  </form>
-  <p>Já tem conta? <a href="{% url 'login' %}">Entrar</a></p>
-</div>
+  <div class="auth-container">
+    <h1>Criar conta</h1>
+
+    {# exibe mensagens (opcional) #}
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Cadastrar</button>
+    </form>
+
+    <p>Já tem conta? <a href="{% url 'login' %}">Entrar</a></p>
+  </div>
 {% endblock %}

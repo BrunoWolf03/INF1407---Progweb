@@ -1,58 +1,31 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Truco App - Home</title>
-  <link rel='stylesheet' href="{% static 'css/home.css' %}" type="text/css">
-</head>
-<body>
+{% extends "core/base.html" %}
+{% block title %}Truco App - Home{% endblock %}
 
-<header>
+{% block content %}
+  <!-- Novo Jogador -->
+  <div class="card" style="text-align:center;">
+    <h2>➕ Novo Jogador</h2>
+    <p>Cadastre novos jogadores para participar das partidas.</p>
 
-  <a href="{% url 'home' %}" class="logo-home">
-    <img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
-  </a>
-
-
-  <nav class="user-nav">
     {% if request.user.is_authenticated %}
-      <span class="username">Olá, {{ request.user.username }}!</span>
-      <a href="{% url 'admin:index' %}" class="nav-btn">Admin</a>
-      <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit" class="nav-btn">Sair</button>
-      </form>
-    {% else %}
-      <a href="{% url 'login' %}" class="nav-btn">Entrar</a>
-      <a href="{% url 'signup' %}" class="nav-btn">Cadastrar</a>
-    {% endif %}
-  </nav>
-</header>
-
-
-
-<main>
-    <!-- Novo Jogador -->
-    <div class="card" style="text-align:center;">
-      <h2>➕ Novo Jogador</h2>
-      <p>Cadastre novos jogadores para participar das partidas.</p>
       <a href="{% url 'jogador_create' %}" class="btn">Cadastrar</a>
-    </div>
+    {% else %}
+      <a href="{% url 'login' %}?next={% url 'jogador_create' %}" class="btn">Cadastrar</a>
+    {% endif %}
+  </div>
 
-    <!-- Ranking -->
-    <div class="card">
-      <h2>🏆 Ranking de Jogadores 🏆</h2> 
-      <ul>
-        {% for jogador in ranking %}
-          <li>{{ forloop.counter }}º - {{ jogador.nome }} ({{ jogador.vitorias }} vitórias)</li>
-        {% empty %}
-          <li>Nenhum jogador cadastrado ainda.</li>
-        {% endfor %}
-      </ul>
-      <a href="{% url 'jogador_list' %}" class="btn">Ver todos os jogadores</a>
-    </div>
-</main>
-</body>
-</html>
+  <!-- Ranking -->
+  <div class="card">
+    <h2>🏆 Ranking de Jogadores 🏆</h2>
+    <ul>
+      {% for jogador in ranking %}
+        <li>{{ forloop.counter }}º - {{ jogador.nome }} ({{ jogador.vitorias }} vitórias)</li>
+      {% empty %}
+        <li>Nenhum jogador cadastrado ainda.</li>
+      {% endfor %}
+    </ul>
+
+    {# se a lista for pública, deixe direto; se quiser proteger, use o mesmo padrão do login #}
+    <a href="{% url 'jogador_list' %}" class="btn">Ver todos os jogadores</a>
+  </div>
+{% endblock %}

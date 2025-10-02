@@ -1,6 +1,8 @@
 <!-- core/templates/core/jogador_detail.html -->
+ {% load static %}
 <!doctype html>
 <html>
+<link rel="stylesheet" href="{% static 'css/jogador.css' %}" type="text/css">
 <head><meta charset="utf-8"><title>{{ jogador.nome }}</title></head>
 <body>
   <h1>{{ jogador.nome }}</h1>

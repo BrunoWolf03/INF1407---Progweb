@@ -1,0 +1,136 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+  margin: 0;
+  padding: 2rem;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #006400;
+  margin-bottom: 2rem;
+}
+
+p a {
+  display: inline-block;
+  background: #006400;
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+p a:hover {
+  background: #228B22;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+li {
+  background: white;
+  margin-bottom: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+li a {
+  color: #006400;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+li a:hover {
+  text-decoration: underline;
+}
+
+/* Links de ação (Editar, Remover) */
+li .actions {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+li .actions a {
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+li .actions a:first-child { /* Editar */
+  background: #006400;
+  color: white;
+}
+
+li .actions a:first-child:hover {
+  background: #228B22;
+}
+
+li .actions a:last-child { /* Remover */
+  background: #b22222;
+  color: white;
+}
+
+li .actions a:last-child:hover {
+  background: #d9534f;
+}
+
+/* Paginação */
+div {
+  text-align: center;
+  margin-top: 2rem;
+  font-weight: bold;
+}
+
+div a {
+  margin: 0 1rem;
+  color: #006400;
+  text-decoration: none;
+}
+
+div a:hover {
+  text-decoration: underline;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  height: 80px; /* define a altura do header */
+  width: 100%;
+  box-sizing: border-box;
+  background: #228B22; /* verde */
+  color: white;
+}
+
+.logo-home {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.logo-home img {
+  max-height: 200px;
+  width: auto;
+  display: block;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: white;
+  text-align: center;
+}

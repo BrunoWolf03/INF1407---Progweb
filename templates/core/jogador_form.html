@@ -1,14 +1,20 @@
-<!-- core/templates/core/jogador_form.html -->
+{% load static %}
 <!doctype html>
-<html>
-<head><meta charset="utf-8"><title>Formulário Jogador</title></head>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Formulário Jogador</title>
+  <link rel="stylesheet" href="{% static 'css/jogador_form.css' %}" type="text/css">
+</head>
 <body>
-  <h1>{{ view.object|default:'Novo Jogador' }}</h1>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Salvar</button>
-    <a href="{% url 'jogador_list' %}">Cancelar</a>
-  </form>
+  <div class="form-container">
+    <h1>{{ view.object|default:"Novo Jogador" }}</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Salvar</button>
+      <a href="{% url 'jogador_list' %}">Cancelar</a>
+    </form>
+  </div>
 </body>
 </html>

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -141,8 +141,18 @@ LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "login"
 
-# Email (para reset de senha em dev)
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+# iCloud SMTP (Apple)
+EMAIL_HOST = "smtp.mail.me.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True          # STARTTLS na porta 587
+
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")          # segredo
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")  # segredo
+
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+EMAIL_TIMEOUT = 20
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

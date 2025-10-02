@@ -4,13 +4,13 @@
 <html>
 <link rel="stylesheet" href="{% static 'css/jogador_detail.css' %}" type="text/css">
 <head><meta charset="utf-8"><title>{{ jogador.nome }}</title></head>
+
 <header>
-
-<c href="{% url 'home' %}" class="logo-home">
+<a href="{% url 'home' %}" class="logo-home">
 <img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
-</c>
-
+</a>
 </header>
+
 <body>
   <h1>{{ jogador.nome }}</h1>
 
@@ -20,13 +20,11 @@
     <p>Vitórias: {{ jogador.vitorias }} — Derrotas: {{ jogador.derrotas }}</p>
     <p>Data de Nascimento: {{ jogador.dtNasc|date:"d/m/Y" }}</p>
 
-    {% if jogador.imagem %}
-      <p><img src="{{ jogador.imagem.url }}" alt="{{ jogador.nome }}"></p>
-    {% endif %}
+    <p><img src="{{ jogador.imagem.url }}" alt="{{ jogador.nome }}" class="player-img"></p>
 
     <p>
-      <a href="{% url 'jogador_update' jogador.pk %}">Editar</a> |
-      <a href="{% url 'jogador_list' %}">Voltar</a>
+     <a href="{% url 'jogador_update' jogador.pk %}" class="btn-action">Editar</a>
+     <a href="{% url 'jogador_list' %}" class="btn-action">Voltar</a>
     </p>
   </div>
 </body>

@@ -17,47 +17,45 @@ h1 {
   margin-bottom: 1rem;
 }
 
-/* Parágrafos de informação */
 p {
   background: white;
   padding: 0.8rem 1rem;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   max-width: 500px;
-  margin: 0.5rem 0;
-  text-align: center;
+  margin: 0.5rem auto; /* centraliza o bloco na página */
+  text-align: center; /* centraliza texto e inline-blocks */
 }
 
 /* Imagem do jogador */
-img {
-  display: block;
+.player-img {
+  display: inline-block; /* para respeitar o text-align do <p> */
   max-width: 250px;
-  width: 100%;
   height: auto;
-  margin: 1rem auto;
+  margin: 1rem 0; /* espaçamento acima e abaixo da imagem */
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
+
 /* Links Editar / Voltar */
-a {
+.btn-action {
   display: inline-block;
   text-decoration: none;
   color: #006400;
   font-weight: bold;
-  margin: 0 0.5rem;
+  margin: 0 0.5rem; /* espaço entre os botões */
   padding: 0.5rem 1rem;
   border: 1px solid #006400;
   border-radius: 8px;
   transition: 0.3s;
 }
 
-a:hover {
+.btn-action:hover {
   background: #228B22;
   color: white;
   text-decoration: none;
 }
-
 /* Container geral (opcional se quiser centralizar tudo melhor) */
 .container {
   display: flex;

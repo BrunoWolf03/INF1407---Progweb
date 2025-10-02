@@ -1,9 +1,14 @@
 <!-- core/templates/core/jogador_confirm_delete.html -->
 {% load static %}
 <!doctype html>
-<link rel="stylesheet" href="{% static 'css/jogador.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/jogador_confirm_delete.css' %}" type="text/css">
 <html>
 <head><meta charset="utf-8"><title>Remover Jogador</title></head>
+<header>
+<a href="{% url 'home' %}" class="logo-home">
+<img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
+</a>
+</header>
 <body>
   <h1>Remover {{ object.nome }}?</h1>
   <form method="post">

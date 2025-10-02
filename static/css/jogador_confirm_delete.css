@@ -1,0 +1,95 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f4f9;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+/* Título da confirmação */
+h1 {
+  color: #006400;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Form container centralizado */
+form {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Botões */
+button,
+a {
+  display: inline-block;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+/* Botão confirmar */
+button[type="submit"] {
+  background: #006400;
+  color: white;
+  border: none;
+}
+
+button[type="submit"]:hover {
+  background: #228B22;
+}
+
+/* Link cancelar */
+form a {
+  background: #b22222;
+  color: white;
+  border: none;
+}
+
+form a:hover {
+  background: #d9534f;
+}
+
+/* Centraliza o conteúdo do formulário */
+form > * {
+  text-align: center;
+}
+
+header {
+  display: flex;
+  justify-content: space-between; /* logo à esquerda, menu à direita */
+  align-items: center;            /* centraliza verticalmente */
+  padding: 0 1rem;
+  height: 60px;
+  border-bottom: 2px solid #ddd;
+  width: 100%;
+  box-sizing: border-box;
+  background: #228B22; 
+}
+
+.logo-home {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.logo-home img {
+  max-height: 150px;
+  width: auto;
+  display: block;
+}

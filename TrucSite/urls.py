@@ -22,8 +22,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", RedirectView.as_view(pattern_name="home", permanent=False), name="root"),
-    path("", include("core.urls")),
+    path("", include("core.urls")),  # já resolve a home
 ]
 
 if settings.DEBUG:

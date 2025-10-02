@@ -39,23 +39,14 @@ class JogadorDeleteView(DeleteView):
     success_url = reverse_lazy("jogador_list")
 
 
-class HomeView(TemplateView):
+class HomeView(LoginRequiredMixin, TemplateView):
     template_name = "core/home.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
-        # Pega as últimas 5 partidas (se existir model Partida)
-        #context["ultimas_partidas"] = Partida.objects.order_by("-data")[:5]
-
-        # Ranking de jogadores (ordenado por vitórias, por exemplo)
         context["ranking"] = Jogador.objects.order_by("-vitorias")[:5]
-
         return context
-
-class HomeView(LoginRequiredMixin, TemplateView):
-    template_name = "core/home.html"  # precisa existir
-
+        
 class SignUpView(CreateView):
     form_class = UserCreationForm
     template_name = "core/registration/signup.html"

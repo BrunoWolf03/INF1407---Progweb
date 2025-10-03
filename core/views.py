@@ -190,3 +190,13 @@ class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
 class PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
     template_name = "core/registration/password_reset_complete.html"
 
+class JogadorUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    model = Jogador
+    form_class = JogadorForm
+    template_name = "core/jogador_form.html"
+    permission_required = "core.change_jogador"
+    raise_exception = True  # 403 em vez de redirect silencioso
+
+    def get_success_url(self):
+        # volta para a lista (ou, se preferir, para o detalhe)
+        return reverse_lazy("jogador_list")

@@ -1,20 +1,12 @@
+{% extends "core/base.html" %}
 {% load static %}
+{% block title %}Escolher Jogador 2 | Truco App{% endblock %}
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Escolher Jogador 2</title>
+{% block extra_head %}
   <link rel="stylesheet" href="{% static 'css/partida_form.css' %}">
-</head>
-<body>
+{% endblock %}
 
-<header>
-  <a href="{% url 'home' %}" class="logo-home">
-    <img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
-  </a>
-</header>
-
+{% block content %}
 <div class="form-container">
   <h1>Escolher Jogador 2</h1>
   <p>Você será automaticamente o Jogador 1 (você).</p>
@@ -32,8 +24,6 @@
     <button type="submit">Próximo</button>
   </form>
 
-  <a href="{% url 'home' %}">Voltar para inicio</a>
+  <a href="{% url 'home' %}">Voltar para início</a>
 </div>
-
-</body>
-</html>
+{% endblock %}

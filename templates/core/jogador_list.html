@@ -26,11 +26,18 @@
             <span>Vitórias: {{ j.vitorias|default:0 }} / Derrotas: {{ j.derrotas|default:0 }}</span>
 
             <div class="actions">
-              {% if request.user.is_authenticated and request.user.is_superuser %}
-                <a href="{% url 'jogador_update' j.pk %}">Editar</a>
-                <a href="{% url 'jogador_delete' j.pk %}" class="btn-remove">Remover</a>
+              {% if request.user.is_authenticated %}
+                {% if request.user.is_superuser %}
+                  <a href="{% url 'jogador_update' j.pk %}">Editar</a>
+                  <a href="{% url 'jogador_delete' j.pk %}" class="btn-remove">Remover</a>
+                {% else %}
+                  {% if request.user.jogador.pk == j.pk %}
+                    <a href="{% url 'jogador_update_self' %}">Editar meu perfil</a>
+                  {% endif %}
+                {% endif %}
               {% endif %}
             </div>
+
           </div>
         </div>
       </li>

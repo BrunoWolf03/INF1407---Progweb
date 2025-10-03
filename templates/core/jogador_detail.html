@@ -1,20 +1,13 @@
+{% extends "core/base.html" %}
 {% load static %}
+{% block title %}{{ jogador.nome }} | Truco App{% endblock %}
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ jogador.nome }} | Truco App</title>
+{% block extra_head %}
+  {# CSS específico desta página #}
   <link rel="stylesheet" href="{% static 'css/jogador_detail.css' %}" type="text/css">
-</head>
-<body>
+{% endblock %}
 
-
-<header>
-  <a href="{% url 'home' %}" class="logo-home">
-    <img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
-  </a>
-</header>
+{% block content %}
 
 <div class="jogador-detail">
   <!-- Jogador principal -->
@@ -34,48 +27,41 @@
     <p>Curso: {{ jogador.curso|default:"—" }} — Período: {{ jogador.periodo|default:"—" }}</p>
     <p>Email: {{ jogador.email|default:"—" }}</p>
     <p>Vitórias: {{ jogador.vitorias|default:0 }} — Derrotas: {{ jogador.derrotas|default:0 }}</p>
-    <p>Data de Nascimento: {{ jogador.dtNasc|date:"d/m/Y" }}</p>
+    <p>Data de Nascimento: {{ jogador.dtNasc|date:"d/m/Y"|default:"—" }}</p>
   </div>
 
-  
+  <!-- Histórico de Partidas -->
+  <div class="historico-partidas">
+    <h2>Histórico de Partidas</h2>
 
+    {% if partidas %}
+      <div class="partidas-list">
+        {% for partida in partidas %}
+          <div class="partida-card">
+            <div class="players">
+              <img src="{{ partida.jogador1.imagem_url }}" alt="{{ partida.jogador1.nome }}" class="player-thumb">
+              <span class="vs-text">vs</span>
+              <img src="{{ partida.jogador2.imagem_url }}" alt="{{ partida.jogador2.nome }}" class="player-thumb">
+            </div>
 
-<div class="historico-partidas">
-  <h2>Histórico de Partidas</h2>
+            <div class="partida-info">
+              <p>{{ partida.jogador1.nome }} x {{ partida.jogador2.nome }}</p>
+              <p>Pontos: {{ partida.pontos }}</p>
+              <p>Vencedor: {{ partida.vencedor.nome }}</p>
+            </div>
 
-  {% if partidas %}
-
-    <div class="partidas-list">
-      {% for partida in partidas %}
-
-        <div class="partida-card">
-
-          <div class="players">
-            <img src="{{ partida.jogador1.imagem_url }}" alt="{{ partida.jogador1.nome }}" class="player-thumb">
-            <span class="vs-text">vs</span>
-            <img src="{{ partida.jogador2.imagem_url }}" alt="{{ partida.jogador2.nome }}" class="player-thumb">
+            {% if request.user.is_authenticated and request.user.is_staff %}
+              <div class="partida-actions">
+                <a href="{% url 'partida_update' partida.pk %}" class="btn-action">Editar Partida</a>
+              </div>
+            {% endif %}
           </div>
-
-
-          <div class="partida-info">
-            <p>{{ partida.jogador1.nome }} x {{ partida.jogador2.nome }}</p>
-            <p>Pontos: {{ partida.pontos }}</p>
-            <p>Vencedor: {{ partida.vencedor.nome }}</p>
-          </div>
-        </div>
-
-        {% if request.user.is_authenticated and request.user.is_staff %}
-    <div class="partida-actions">
-      <a href="{% url 'partida_update' partida.pk %}" class="btn-action">Editar Partida</a>
-    </div>
-  {% endif %}
-      {% endfor %}
-    </div>
-  {% else %}
-    <p>Este jogador ainda não participou de nenhuma partida.</p>
-  {% endif %}
-
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Este jogador ainda não participou de nenhuma partida.</p>
+    {% endif %}
+  </div>
 </div>
 
-</body>
-</html>
+{% endblock %}

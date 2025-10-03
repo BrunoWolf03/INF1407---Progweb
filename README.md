@@ -2,6 +2,7 @@
 Trabalho Final — Site de Gerenciamento de Jogadores
 
 Bruno Wolf - 2212576
+
 Luca Oliveira Lima - 2210831
 
 ## Escopo do Projeto

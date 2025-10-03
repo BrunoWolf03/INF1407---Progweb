@@ -15,10 +15,10 @@ O foco foi explorar os principais recursos do Django, incluindo:
 ---
 
 ## Funcionalidades Implementadas
--  **Cadastro de jogadores** com informações básicas  
--  **Listagem de jogadores** em páginas dedicadas 
+-  **Cadastro de jogadores e partidas** com informações básicas  
+-  **Listagem de jogadores e partidas** em páginas dedicadas 
 -  **Rank de jogadores** em páginas dedicadas 
--  **Edição e remoção de jogadores** diretamente pelo sistema  
+-  **Edição e remoção de jogadores e partidas (só admin)** diretamente pelo sistema  
 -  **Autenticação básica** de usuários (login/logout)  
 -  **Interface responsiva** baseada em templates do Django  
 -  **Botão Home** botão com a logo do site
@@ -30,26 +30,27 @@ O foco foi explorar os principais recursos do Django, incluindo:
 1. **Página de Login**  
    - Permite que o usuário se registre para poder fazer alterações no banco de dados do site.
    - Caso o usuário esqueça sua senha o mesmo pode redefinir sua senha, um email será enviado para a troca da senha.
+   - Quando o cadastro é finalizado automaticamente é criado um jogador com o nome daquele usuário cadastrado
 
 2. **Home**  
-   - Na tela home o usuário poderá cadastrar um novo jogador e informar suas estatisticas, observar o rank atual dos jogadores e acessar a tela do admin caso tenha permissão.  
-   - Aqui é a primeira vez que vemos o botão home (logo do site), quando o usuário clicar na logo do site, em qualquer outra pagina, será levado novamente para a pagina home.  
+   - Na tela home o usuário poderá cadastrar uma nova partida e informar suas estatisticas, observar o rank atual dos jogadores.  
+   - Aqui é a primeira vez que vemos o botão home (logo do site), quando o usuário clicar na logo do site, em qualquer outra pagina, será levado novamente para a pagina home. 
+   - Ao clicar no próprio nome no canto superior direito, o usuário consegue editar as informações do seu perfil.
+   - Por último temos o botão "sair" para o usuário sair da sua conta.
 
-3. **Ranking de Jogadores**  
-   - Botão **"Novo Jogador"** para criar um novo jogador com suas estatisticas.  
-   - Pode adicionar outros jogadores já existentes.  
-   - Pode remover jogadores já existentes.
+3. **Ranking de Jogadores**   
+   - Pode ver as estatisticas de jogadores ja cadastrados.
+   - Vê por ordem quem é o jogador que mais venceu atualmente.
 
-4. **Criar Novo Jogador**  
-   - Usuário pode cadastrar as informações do novo jogador.  
-   - O novo jogador criado vai diretamente para a base de dados do site.  
+4. **Criar uma partida**  
+   - Usuário primeiro preenche quem é o adversário ja cadastrado no banco que jogou a partida contra.
+   - Posteriormente preenche as informações da partida.
 
-5. **Deletar Jogador**  
-   - Usuário pode apagar as informações do jogador.  
-   - O jogador vai ser removido diretamente da base de dados do site.  
+5. **Editar Jogador/Partida(Apenas admin)**  
+   - Admin pode editar informações de um jogador / partida.  
+   - Admin pode apagar jogadores ou partidas
 
-6. **Administrador**  
-   - Na tela de admin o usuário com permissão terá acesso a todas as funcionalidades que a tela de admin do django funciona.  
+
 ---
 
 ## O que funcionou
@@ -60,12 +61,12 @@ O foco foi explorar os principais recursos do Django, incluindo:
 ---
 
 ## O que não funcionou
-- A remoção de jogadores foi implementada com redirecionamento, mas **não pôde exibir um pop-up de confirmação**, já que seria necessário o uso de **JavaScript** (não permitido neste trabalho).  
+- A remoção de jogadores e partidas foi implementada com redirecionamento, mas **não pôde exibir um pop-up de confirmação**, já que seria necessário o uso de **JavaScript**.  
 - Fora essa limitação, todas as demais funcionalidades funcionaram corretamente.  
 
 ---
 
-## 📌 Observações Finais
+##  Observações Finais
 O projeto foi concluído conforme os requisitos da disciplina.  
 Todas as funcionalidades principais foram implementadas com sucesso, e o site encontra-se estável e utilizável.  
 Apenas a ausência de JavaScript limitou a experiência da remoção de jogadores, mas isso não prejudica o funcionamento do sistema.  

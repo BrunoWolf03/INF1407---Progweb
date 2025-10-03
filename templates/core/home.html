@@ -10,7 +10,8 @@
 
 {% block content %}
   <!-- Novo Jogador -->
-  <div class="card">
+{% comment %}
+<div class="card">
     <h2>➕ Novo Jogador ➕</h2>
     <p>Cadastre novos jogadores para participar das partidas.</p>
 
@@ -19,7 +20,8 @@
     {% else %}
       <a href="{% url 'login' %}?next={% url 'jogador_create' %}" class="btn">Cadastrar</a>
     {% endif %}
-  </div>
+</div>
+{% endcomment %}
 
   <!-- Novo Card: Criar Partida -->
 <div class="card">

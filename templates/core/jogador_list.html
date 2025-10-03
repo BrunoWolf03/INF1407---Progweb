@@ -10,7 +10,9 @@
 {% block content %}
   <h1>Jogadores Cadastrados</h1>
 
+  {% if request.user.is_authenticated and request.user.is_superuser %}
   <p><a href="{% url 'jogador_create' %}">Novo Jogador</a></p>
+  {% endif %}
 
   <ul class="jogador-list">
     {% for j in jogadores %}

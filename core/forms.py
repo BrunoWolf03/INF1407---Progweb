@@ -7,15 +7,18 @@ import re
 from .models import Jogador, Partida
 
 class JogadorForm(forms.ModelForm):
-    dtNasc = forms.DateField(
-        label="Data de nascimento",
-        input_formats=["%d/%m/%Y", "%Y-%m-%d"],
-        widget=forms.DateInput(format="%d/%m/%Y", attrs={"placeholder": "DD/MM/AAAA"})
-    )
-
     class Meta:
         model = Jogador
-        fields = ["nome", "curso", "periodo", "email", "vitorias", "derrotas", "imagem", "dtNasc"]
+        # campos que o jogador pode editar (excluímos vitorias e derrotas)
+        exclude = ["vitorias", "derrotas", "user"]
+        widgets = {
+            "nome": forms.TextInput(attrs={"placeholder": "Nome completo"}),
+            "curso": forms.TextInput(attrs={"placeholder": "Curso"}),
+            "periodo": forms.NumberInput(attrs={"min": 1}),
+            "email": forms.EmailInput(attrs={"placeholder": "Email"}),
+            "dtNasc": forms.DateInput(attrs={"type": "date"}),
+            "imagem": forms.ClearableFileInput(),
+        }
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True, help_text="Informe um e-mail válido.")

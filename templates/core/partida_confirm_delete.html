@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+
+<html lang="pt-BR">
+
+<header>
+  <a href="{% url 'home' %}" class="logo-home">
+    <img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
+  </a>
+</header>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Apagar Partida</title>
+  <link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+<body>
+  <div class="form-container">
+    <h1>⚠ Confirmar Exclusão</h1>
+    <p>Você tem certeza que deseja <strong>apagar esta partida</strong>?</p>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-actions">
+        <button type="submit" class="btn-danger">🗑 Confirmar</button>
+        <a href="{% url 'home' %}" class="btn-action">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</body>
+
+
+
+</html>
+
+

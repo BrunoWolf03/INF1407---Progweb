@@ -1,5 +1,3 @@
-/* jogador_detail.css - Centralizado e com histórico centralizado */
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -7,90 +5,30 @@ body {
     color: #333;
     display: flex;
     flex-direction: column;
-    align-items: center; /* centraliza conteúdo horizontalmente */
-}
-
-header {
-    width: 100%;
-    background-color: #2c3e50;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: center; /* centraliza logo */
-}
-
-header .logo-home img {
-    height: 50px;
+    align-items: center; /* mantém centralizado */
 }
 
 .jogador-detail {
     max-width: 900px;
     width: 100%;
-    padding: 20px;
     margin-top: 20px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
-    align-items: center; /* centraliza todo o conteúdo */
-    text-align: center;  /* centraliza textos */
-}
-
-.jogador-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.player-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-    border: 3px solid #3498db;
-}
-
-.jogador-nome {
-    margin: 0;
-    font-size: 2rem;
-    color: #2c3e50;
+    align-items: center; /* centraliza conteúdo */
+    text-align: center;
+    margin-left: auto;   /* garante centralização */
+    margin-right: auto;  /* garante centralização */
+    padding: 20px;
 }
 
 .jogador-actions {
-    margin-top: 10px;
-}
-
-.jogador-actions .btn-action {
-    text-decoration: none;
-    color: #fff;
-    background-color: #3498db;
-    padding: 8px 15px;
-    border-radius: 5px;
-    margin: 0 5px;
-    transition: background-color 0.3s;
-}
-
-.jogador-actions .btn-action:hover {
-    background-color: #2980b9;
-}
-
-.jogador-info {
-    margin-top: 20px;
-    font-size: 1rem;
-}
-
-.historico-partidas {
-    margin-top: 30px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* centraliza o bloco inteiro */
-}
-
-.historico-partidas h2 {
-    margin-bottom: 20px;
-    color: #2c3e50;
+    margin-top: 15px;
+    display: flex;              /* coloca os botões lado a lado */
+    justify-content: center;    /* centraliza os botões */
+    gap: 10px;                  /* espaço entre eles */
 }
 
 .partidas-list {
@@ -98,54 +36,95 @@ header .logo-home img {
     flex-direction: column;
     align-items: center; /* centraliza os cards */
     gap: 15px;
+    width: 100%;
 }
 
 .partida-card {
-    width: 80%;                 /* tamanho do card menor que o container */
-    display: flex;
-    flex-direction: column;      /* imagens em cima, infos embaixo */
-    align-items: center;         /* centraliza tudo dentro do card */
+    max-width: 600px;   /* controla o tamanho */
+    width: 100%;
     text-align: center;
-    background-color: #ecf0f1;
-    padding: 15px 20px;
-    border-radius: 8px;
-    transition: transform 0.2s;
 }
 
-.partida-card:hover {
-    transform: scale(1.02);
+header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;            
+  padding: 0 1rem;
+  height: 60px;
+  border-bottom: 2px solid #ddd;
+  width: 100%;
+  box-sizing: border-box;
+  background: #228B22; 
 }
 
-.players {
-    display: flex;
-    justify-content: center; /* centraliza as imagens lado a lado */
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+.logo-home {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
-.player-thumb {
-    width: 60px;
-    height: 60px;
+.logo-home img {
+  max-height: 150px;
+  width: auto;
+  display: block;
+}
+
+/* ===== BOTÕES ===== */
+.jogador-actions .btn-action {
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(135deg, #228B22, #228B22);
+    padding: 10px 20px;
+    border-radius: 25px;
+    margin: 0 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.jogador-actions .btn-action:hover {
+    background: linear-gradient(135deg, #228B22, #228B22);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+/* ===== IMAGEM DO JOGADOR PRINCIPAL ===== */
+.player-img {
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #3498db;
+    margin-bottom: 10px;
+    border: 4px solid #228B22;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-.vs-text {
+/* ===== MINIATURAS NAS PARTIDAS ===== */
+.player-thumb {
+    width: 50px;       /* menorzinho */
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #32c132;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.partida-actions .btn-action {
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(135deg, #228B22, #228B22);
+    padding: 10px 20px;
+    border-radius: 25px;
+    margin: 0 5px;
+    font-size: 1rem;
     font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-.partida-info p {
-    margin: 3px 0;
-}
-
-@media (max-width: 600px) {
-    .partida-card {
-        flex-direction: column; /* card empilha no mobile */
-    }
-
-    .players {
-        justify-content: center;
-    }
+.partida-actions .btn-action:hover {
+    background: linear-gradient(135deg, #228B22, #33c533);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }

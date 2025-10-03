@@ -33,20 +33,11 @@ class JogadorDetailView(DetailView):
         context['partidas'] = partidas
         return context
 
-class JogadorCreateView(LoginRequiredMixin, CreateView):
+class JogadorCreateView(CreateView):
     model = Jogador
     form_class = JogadorForm
     template_name = "core/jogador_form.html"
-    success_url = reverse_lazy("jogador_list")
-
-# ==== Somente quem tiver permissão pode EDITAR ====
-class JogadorUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
-    model = Jogador
-    form_class = JogadorForm
-    template_name = "core/jogador_form.html"
-    success_url = reverse_lazy("jogador_list")
-    permission_required = "core.change_jogador"   # app_label.change_model
-    raise_exception = True  # retorna 403 em vez de redirecionar
+    success_url = reverse_lazy("jogador_list") 
 
 class JogadorSelfUpdateView(LoginRequiredMixin, UpdateView):
     model = Jogador
@@ -55,7 +46,23 @@ class JogadorSelfUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("jogador_list")
 
     def get_object(self, queryset=None):
+        # sempre edita só o jogador logado
         return get_object_or_404(Jogador, user=self.request.user)
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        # remove do form (não aparece no HTML)
+        form.fields.pop("vitorias", None)
+        form.fields.pop("derrotas", None)
+        return form
+
+    def form_valid(self, form):
+        # proteção extra: mesmo se tentarem mandar vitorias/derrotas via POST
+        jogador = form.save(commit=False)
+        jogador.vitorias = self.get_object().vitorias
+        jogador.derrotas = self.get_object().derrotas
+        jogador.save()
+        return super().form_valid(form)
 
 # ==== Somente quem tiver permissão pode REMOVER ====
 class JogadorDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
@@ -122,6 +129,22 @@ def PartidaListView(request):
     partidas = Partida.objects.all().order_by("-data")
     return render(request, "lista_partidas.html", {"partidas": partidas})
 
+
+class PartidaDeleteView(DeleteView):
+    model = Partida
+    template_name = "core/partida_confirm_delete.html"
+
+    def get_success_url(self):
+        jogador = self.object.jogador1  
+        return reverse_lazy("jogador_detail", kwargs={"pk": jogador.pk})
+
+class PartidaUpdateView(UpdateView):
+    model = Partida
+    fields = ["jogador1", "jogador2", "vencedor", "perdedor", "pontos"]  
+    template_name = "core/partida_form.html"
+    success_url = reverse_lazy("home")
+
+
 class HomeView(TemplateView):
     template_name = "core/home.html"
 
@@ -166,3 +189,4 @@ class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
 
 class PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
     template_name = "core/registration/password_reset_complete.html"
+

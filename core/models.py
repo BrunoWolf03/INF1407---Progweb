@@ -41,7 +41,8 @@ class Jogador(models.Model):
         return static('img/defaultavatar.png')
 
     from django.db import models
-from core.models import Jogador  # ajuste o import conforme sua app
+
+from core.models import Jogador  
 
 class Partida(models.Model):
     jogador1 = models.ForeignKey(Jogador, related_name="partidas_jogador1", on_delete=models.CASCADE)

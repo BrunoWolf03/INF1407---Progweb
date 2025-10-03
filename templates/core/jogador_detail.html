@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<!-- Header manual -->
+
 <header>
   <a href="{% url 'home' %}" class="logo-home">
     <img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
@@ -63,11 +63,18 @@
             <p>Vencedor: {{ partida.vencedor.nome }}</p>
           </div>
         </div>
+
+        {% if request.user.is_authenticated and request.user.is_staff %}
+    <div class="partida-actions">
+      <a href="{% url 'partida_update' partida.pk %}" class="btn-action">Editar Partida</a>
+    </div>
+  {% endif %}
       {% endfor %}
     </div>
   {% else %}
     <p>Este jogador ainda não participou de nenhuma partida.</p>
   {% endif %}
+
 </div>
 
 </body>

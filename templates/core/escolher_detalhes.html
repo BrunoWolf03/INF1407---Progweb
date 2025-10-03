@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Criar Partida</title>
+  <link rel="stylesheet" href="{% static 'css/partida_form.css' %}">
+</head>
+<body>
+
+<header>
+  <a href="{% url 'home' %}" class="logo-home">
+    <img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
+  </a>
+</header>
+
+<div class="form-container">
+  <h1>Criar Partida 1x1</h1>
+  <p>Jogador 1: {{ jogador1.nome }}</p>
+  <p>Jogador 2: {{ jogador2.nome }}</p>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar Partida</button>
+  </form>
+
+  <a href="{% url 'home' %}">Voltar para inicio</a>
+</div>
+
+</body>
+</html>

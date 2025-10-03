@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erro</title>
+  <!-- Link do CSS -->
+  <link rel="stylesheet" href="{% static 'css/erro.css' %}">
+</head>
+<body>
+
+<header>
+<a href="{% url 'home' %}" class="logo-home">
+<img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
+</a>
+</header>
+
+<main>
+  <div class="error-container">
+    <h1>Ops! 😢</h1>
+    <p>Sua conta não está vinculada a um jogador para criar uma partida.</p>
+    <p>Vincule ela para poder cadastrar partidas.</p>
+    <a href="{% url 'home' %}">Voltar para a página inicial</a>
+  </div>
+</main>
+
+</body>
+</html>

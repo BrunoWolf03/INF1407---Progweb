@@ -3,12 +3,15 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin  # ⬅️ adicionado
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from .models import Jogador
-from .forms import JogadorForm, CustomUserCreationForm
+from .models import Jogador, Partida
+from .forms import JogadorForm, CustomUserCreationForm, PartidaForm
 from django.contrib.auth import views as auth_views
 from django.contrib.auth import logout
 from django.shortcuts import redirect, get_object_or_404
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+
 
 class JogadorListView(ListView):
     model = Jogador
@@ -52,6 +55,63 @@ class JogadorDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView)
     success_url = reverse_lazy("jogador_list")
     permission_required = "core.delete_jogador"
     raise_exception = True
+
+
+
+@login_required
+def PartidaEscolherJogadorView(request):
+    jogador1 = request.user.jogador
+
+    if request.method == "POST":
+        jogador2_id = request.POST.get("jogador2")
+        try:
+            jogador2 = Jogador.objects.get(id=jogador2_id)
+            if jogador2 == jogador1:
+                raise ValueError("Não pode escolher você mesmo como Jogador 2")
+        except (Jogador.DoesNotExist, ValueError):
+            return render(request, "core/erro.html", {"mensagem": "Jogador inválido."})
+        
+        # Salva temporariamente na sessão
+        request.session['jogador2_id'] = jogador2.id
+        return redirect("partida_detalhes")  # próxima tela
+    
+    # Lista apenas jogadores válidos (exceto o jogador1)
+    jogadores = Jogador.objects.exclude(id=jogador1.id)
+    return render(request, "core/escolher_jogador.html", {"jogadores": jogadores})
+
+@login_required
+def PartidaDetalhesView(request):
+    jogador1 = request.user.jogador
+    jogador2_id = request.session.get("jogador2_id")
+    if not jogador2_id:
+        return redirect("partida_escolher_jogador")
+    
+    jogador2 = Jogador.objects.get(id=jogador2_id)
+
+    if request.method == "POST":
+        form = PartidaForm(request.POST, jogador1=jogador1, jogador2=jogador2)
+        if form.is_valid():
+            partida = form.save(commit=False)
+            partida.jogador1 = jogador1
+            partida.jogador2 = jogador2
+            partida.save()
+            del request.session['jogador2_id']
+            return redirect("jogador_list")
+    else:
+        form = PartidaForm(request.POST or None, jogador1=jogador1, jogador2=jogador2)
+
+    return render(request, "core/escolher_detalhes.html", {
+        "form": form,
+        "jogador1": jogador1,
+        "jogador2": jogador2
+    })
+
+
+
+@login_required
+def PartidaListView(request):
+    partidas = Partida.objects.all().order_by("-data")
+    return render(request, "lista_partidas.html", {"partidas": partidas})
 
 class HomeView(TemplateView):
     template_name = "core/home.html"

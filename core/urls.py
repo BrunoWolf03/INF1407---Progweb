@@ -21,5 +21,10 @@ urlpatterns = [
 
     path('accounts/reset/done/',views.PasswordResetCompleteView.as_view(),name='password_reset_complete'),
     path("jogadores/me/editar/", views.JogadorSelfUpdateView.as_view(), name="jogador_update_self"),
+
+    path("partidas/escolher/", views.PartidaEscolherJogadorView, name="partida_escolher_jogador"),
+    path("partidas/nova/", views.PartidaDetalhesView, name="partida_detalhes"),
+    path("partidas/", views.PartidaListView, name="lista_partidas"),
+
 ]
 

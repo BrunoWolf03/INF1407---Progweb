@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Escolher Jogador 2</title>
+  <link rel="stylesheet" href="{% static 'css/partida_form.css' %}">
+</head>
+<body>
+
+<header>
+  <a href="{% url 'home' %}" class="logo-home">
+    <img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
+  </a>
+</header>
+
+<div class="form-container">
+  <h1>Escolher Jogador 2</h1>
+  <p>Você será automaticamente o Jogador 1 (você).</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <p>
+      <label for="jogador2">Selecione o Jogador 2:</label>
+      <select name="jogador2" id="jogador2">
+        {% for j in jogadores %}
+          <option value="{{ j.id }}">{{ j.nome }}</option>
+        {% endfor %}
+      </select>
+    </p>
+    <button type="submit">Próximo</button>
+  </form>
+
+  <a href="{% url 'home' %}">Voltar para inicio</a>
+</div>
+
+</body>
+</html>

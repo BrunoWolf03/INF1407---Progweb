@@ -1,10 +1,17 @@
 {% extends "core/base.html" %}
+{% load static %}
 {% block title %}Truco App - Home{% endblock %}
+
+<header>
+<a href="{% url 'home' %}" class="logo-home">
+<img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
+</a>
+</header>
 
 {% block content %}
   <!-- Novo Jogador -->
-  <div class="card" style="text-align:center;">
-    <h2>➕ Novo Jogador</h2>
+  <div class="card">
+    <h2>➕ Novo Jogador ➕</h2>
     <p>Cadastre novos jogadores para participar das partidas.</p>
 
     {% if request.user.is_authenticated %}
@@ -13,6 +20,18 @@
       <a href="{% url 'login' %}?next={% url 'jogador_create' %}" class="btn">Cadastrar</a>
     {% endif %}
   </div>
+
+  <!-- Novo Card: Criar Partida -->
+<div class="card">
+  <h2>🎮 Criar Partida 🎮</h2>
+  <p>Inicie uma nova partida de Truco. Você será automaticamente o Jogador 1.</p>
+
+  {% if request.user.is_authenticated %}
+      <a href="{% url 'partida_escolher_jogador' %}" class="btn">Criar Partida</a>
+  {% else %}
+      <a href="{% url 'login' %}?next={% url 'partida_escolher_jogador' %}" class="btn">Criar Partida</a>
+  {% endif %}
+</div>
 
   <!-- Ranking -->
   <div class="card">
@@ -25,7 +44,6 @@
       {% endfor %}
     </ul>
 
-    {# se a lista for pública, deixe direto; se quiser proteger, use o mesmo padrão do login #}
     <a href="{% url 'jogador_list' %}" class="btn">Ver todos os jogadores</a>
   </div>
 {% endblock %}

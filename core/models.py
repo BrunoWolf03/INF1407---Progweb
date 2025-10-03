@@ -39,3 +39,26 @@ class Jogador(models.Model):
         except ValueError:
             pass
         return static('img/defaultavatar.png')
+
+    from django.db import models
+from core.models import Jogador  # ajuste o import conforme sua app
+
+class Partida(models.Model):
+    jogador1 = models.ForeignKey(Jogador, related_name="partidas_jogador1", on_delete=models.CASCADE)
+    jogador2 = models.ForeignKey(Jogador, related_name="partidas_jogador2", on_delete=models.CASCADE)
+    vencedor = models.ForeignKey(Jogador, related_name="vitorias_partidas", on_delete=models.CASCADE)
+    perdedor = models.ForeignKey(Jogador, related_name="derrotas_partidas", on_delete=models.CASCADE)
+    data = models.DateTimeField(auto_now_add=True)
+    pontos = models.CharField(max_length=10)
+
+    def save(self, *args, **kwargs):
+        novo = self.pk is None
+        super().save(*args, **kwargs)
+        if novo:
+            self.vencedor.vitorias += 1
+            self.vencedor.save()
+            self.perdedor.derrotas += 1
+            self.perdedor.save()
+
+    def __str__(self):
+        return f"{self.jogador1} vs {self.jogador2} - {self.vencedor} venceu"

@@ -17,8 +17,18 @@
 
   <nav class="user-nav">
     {% if request.user.is_authenticated %}
-      <span class="username">Olá, {{ request.user.username }}!</span>
-      <a href="{% url 'admin:index' %}" class="nav-btn">Admin</a>
+      {% if request.user.is_staff or request.user.is_superuser %}
+        <span class="username">Olá, {{ request.user.username }}!</span>
+      {% else %}
+        <a href="{% url 'jogador_update_self' %}" class="username" title="Editar meu perfil">
+          Olá, {{ request.user.username }}!
+        </a>
+      {% endif %}
+
+      {% if request.user.is_staff or request.user.is_superuser %}
+        <a href="{% url 'admin:index' %}" class="nav-btn">Admin</a>
+      {% endif %}
+
       <form method="post" action="{% url 'logout' %}">
         {% csrf_token %}
         <button type="submit" class="nav-btn">Sair</button>

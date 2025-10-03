@@ -1,61 +1,51 @@
+{% extends "core/base.html" %}
 {% load static %}
-<!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <title>Jogadores</title>
+
+{% block title %}Jogadores | Truco App{% endblock %}
+
+{% block extra_head %}
   <link rel="stylesheet" href="{% static 'css/jogador_list.css' %}" type="text/css">
-</head>
+{% endblock %}
 
-<body>
-<header>
-  <a href="{% url 'home' %}" class="logo-home">
-    <img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
-  </a>
+{% block content %}
   <h1>Jogadores Cadastrados</h1>
-</header>
 
-<p><a href="{% url 'jogador_create' %}">Novo Jogador</a></p>
+  <p><a href="{% url 'jogador_create' %}">Novo Jogador</a></p>
 
-<ul>
-  {% for j in jogadores %}
-    <li>
-      <div class="player-card">
-        {% if j.imagem %}
-          <img src="{{ j.imagem.url }}" alt="{{ j.nome }}" class="player-img">
-        {% else %}
-          <img src="{% static 'img/defaultavatar.png' %}" alt="Sem foto" class="player-img">
-        {% endif %}
+  <ul class="jogador-list">
+    {% for j in jogadores %}
+      <li>
+        <div class="player-card">
+          <img src="{{ j.imagem_url }}" alt="{{ j.nome }}" class="player-img">
 
-        <div class="player-info">
-          <a href="{% url 'jogador_detail' j.pk %}">{{ j.nome }}</a>
-          <span>{{ j.curso }} ({{ j.periodo }}º)</span>
-          <span>Vitórias: {{ j.vitorias }} / Derrotas: {{ j.derrotas }}</span>
+          <div class="player-info">
+            <a href="{% url 'jogador_detail' j.pk %}">{{ j.nome }}</a>
+            <span>{{ j.curso|default:"—" }} ({{ j.periodo|default:"—" }}º)</span>
+            <span>Vitórias: {{ j.vitorias|default:0 }} / Derrotas: {{ j.derrotas|default:0 }}</span>
 
-          <div class="actions">
-            <a href="{% url 'jogador_update' j.pk %}">Editar</a>
-            <!-- Botão “Remover” agora leva direto para a tela de confirmação -->
-            <a href="{% url 'jogador_delete' j.pk %}" class="btn-remove">Remover</a>
+            <div class="actions">
+              {% if request.user.is_authenticated and request.user.is_superuser %}
+                <a href="{% url 'jogador_update' j.pk %}">Editar</a>
+                <a href="{% url 'jogador_delete' j.pk %}" class="btn-remove">Remover</a>
+              {% endif %}
+            </div>
           </div>
         </div>
-      </div>
-    </li>
-  {% empty %}
-    <li>Nenhum jogador cadastrado.</li>
-  {% endfor %}
-</ul>
+      </li>
+    {% empty %}
+      <li>Nenhum jogador cadastrado.</li>
+    {% endfor %}
+  </ul>
 
-{% if is_paginated %}
-  <div class="pagination">
-    {% if page_obj.has_previous %}
-      <a href="?page={{ page_obj.previous_page_number }}">« Anterior</a>
-    {% endif %}
-    <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
-    {% if page_obj.has_next %}
-      <a href="?page={{ page_obj.next_page_number }}">Próxima »</a>
-    {% endif %}
-  </div>
-{% endif %}
-
-</body>
-</html>
+  {% if is_paginated %}
+    <div class="pagination">
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">« Anterior</a>
+      {% endif %}
+      <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Próxima »</a>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock %}

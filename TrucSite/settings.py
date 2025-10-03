@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-import os
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -148,10 +149,10 @@ EMAIL_HOST = "smtp.mail.me.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True          # STARTTLS na porta 587
 
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")          # segredo
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")  # segredo
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""  # senha de app (16 caracteres)
 
-DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+DEFAULT_FROM_EMAIL = "TrucSite <chat@truc.com.br>"
 EMAIL_TIMEOUT = 20
 
 MEDIA_URL = '/media/'

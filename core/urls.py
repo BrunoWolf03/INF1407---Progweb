@@ -20,5 +20,6 @@ urlpatterns = [
     path('accounts/reset/<uidb64>/<token>/',views.PasswordResetConfirmView.as_view(),name='password_reset_confirm'),
 
     path('accounts/reset/done/',views.PasswordResetCompleteView.as_view(),name='password_reset_complete'),
+    path("jogadores/me/editar/", views.JogadorSelfUpdateView.as_view(), name="jogador_update_self"),
 ]
 

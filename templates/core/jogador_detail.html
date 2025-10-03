@@ -1,31 +1,31 @@
-<!-- core/templates/core/jogador_detail.html -->
- {% load static %}
-<!doctype html>
-<html>
-<link rel="stylesheet" href="{% static 'css/jogador_detail.css' %}" type="text/css">
-<head><meta charset="utf-8"><title>{{ jogador.nome }}</title></head>
+{% extends "core/base.html" %}
+{% load static %}
 
-<header>
-<a href="{% url 'home' %}" class="logo-home">
-<img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
-</a>
-</header>
+{% block title %}{{ jogador.nome }} | Truco App{% endblock %}
 
-<body>
-  <h1>{{ jogador.nome }}</h1>
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/jogador_detail.css' %}" type="text/css">
+{% endblock %}
 
-  <div class="jogador-info">
-    <p>Curso: {{ jogador.curso }} — Período: {{ jogador.periodo }}</p>
-    <p>Email: {{ jogador.email }}</p>
-    <p>Vitórias: {{ jogador.vitorias }} — Derrotas: {{ jogador.derrotas }}</p>
-    <p>Data de Nascimento: {{ jogador.dtNasc|date:"d/m/Y" }}</p>
+{% block content %}
+  <div class="jogador-detail">
+    <div class="jogador-header">
+      <img src="{{ jogador.imagem_url }}" alt="{{ jogador.nome }}" class="player-img">
+      <h1 class="jogador-nome">{{ jogador.nome }}</h1>
+    </div>
 
-    <p><img src="{{ jogador.imagem.url }}" alt="{{ jogador.nome }}" class="player-img"></p>
+    <div class="jogador-info">
+      <p>Curso: {{ jogador.curso|default:"—" }} — Período: {{ jogador.periodo|default:"—" }}</p>
+      <p>Email: {{ jogador.email|default:"—" }}</p>
+      <p>Vitórias: {{ jogador.vitorias|default:0 }} — Derrotas: {{ jogador.derrotas|default:0 }}</p>
+      <p>Data de Nascimento: {{ jogador.dtNasc|date:"d/m/Y" }}</p>
+    </div>
 
-    <p>
-     <a href="{% url 'jogador_update' jogador.pk %}" class="btn-action">Editar</a>
-     <a href="{% url 'jogador_list' %}" class="btn-action">Voltar</a>
-    </p>
+    <div class="jogador-actions">
+      {% if request.user.is_authenticated and request.user.is_staff %}
+        <a href="{% url 'jogador_update' jogador.pk %}" class="btn-action">Editar</a>
+      {% endif %}
+      <a href="{% url 'jogador_list' %}" class="btn-action">Voltar</a>
+    </div>
   </div>
-</body>
-</html>
+{% endblock %}

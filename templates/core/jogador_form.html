@@ -1,21 +1,13 @@
+{% extends "core/base.html" %}
 {% load static %}
-<!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <title>Formulário Jogador</title>
+
+{% block title %}{{ view.object|default:"Novo Jogador" }} | Truco App{% endblock %}
+
+{% block extra_head %}
   <link rel="stylesheet" href="{% static 'css/jogador_form.css' %}" type="text/css">
-</head>
+{% endblock %}
 
-<header>
-
-<a href="{% url 'home' %}" class="logo-home">
-<img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
-</a>
-
-</header>
-
-<body>
+{% block content %}
   <div class="form-container">
     <h1>{{ view.object|default:"Novo Jogador" }}</h1>
     <form method="post" enctype="multipart/form-data">
@@ -25,5 +17,4 @@
       <a href="{% url 'jogador_list' %}">Cancelar</a>
     </form>
   </div>
-</body>
-</html>
+{% endblock %}

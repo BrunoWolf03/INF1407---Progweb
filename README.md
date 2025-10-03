@@ -83,6 +83,8 @@ Depois, abra no navegador:
 ---
 
 ## Observações Finais
+Para que o sistema de recuperação de senha por e-mail funcione corretamente dentro do container Docker, é necessário substituir manualmente as linhas 152 e 153 do arquivo /app/TrucSite/settings.py pelas configurações fornecidas. As credenciais e informações necessárias para essa substituição estão disponíveis junto à entrega realizada no EAD.
+
 O projeto foi concluído conforme os requisitos da disciplina.  
 Todas as funcionalidades principais foram implementadas com sucesso, e o site encontra-se estável e utilizável.  
 Apenas a ausência de JavaScript limitou a experiência da remoção de jogadores, mas isso não prejudica o funcionamento do sistema.  

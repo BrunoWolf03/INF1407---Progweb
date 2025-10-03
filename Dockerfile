@@ -21,4 +21,4 @@ COPY . .
 RUN mkdir -p /app/staticfiles /app/media
 
 # Comando padrão: gunicorn (ajustado no docker-compose para esperar DB)
-CMD ["gunicorn", "app.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "TrucSite.wsgi:application", "--bind", "0.0.0.0:8000"]

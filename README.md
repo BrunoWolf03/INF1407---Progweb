@@ -1,6 +1,9 @@
 # INF1407 — ProgWeb  
 Trabalho Final — Site de Gerenciamento de Jogadores
 
+Bruno Wolf - 2212576
+Luca Oliveira Lima - 2210831
+
 ## Escopo do Projeto
 Este projeto foi desenvolvido para a disciplina **INF1407 — Programação Web**, com o objetivo de criar um site dinâmico em **Django** para o gerenciamento das estatísticas de jogadores de truco na PUC.  
 

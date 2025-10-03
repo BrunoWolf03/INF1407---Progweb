@@ -1,88 +1,151 @@
-/* jogador.css */
+/* jogador_detail.css - Centralizado e com histórico centralizado */
 
-/* Body centralizado e com fundo suave */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: #f4f4f9;
-  color: #333;
-  display: flex;
-  flex-direction: column;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f4f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centraliza conteúdo horizontalmente */
 }
 
-/* Título do jogador */
-h1 {
-  color: #006400;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-p {
-  background: white;
-  padding: 0.8rem 1rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  max-width: 500px;
-  margin: 0.5rem auto; /* centraliza o bloco na página */
-  text-align: center; /* centraliza texto e inline-blocks */
-}
-
-/* Imagem do jogador */
-.player-img {
-  display: inline-block; /* para respeitar o text-align do <p> */
-  max-width: 250px;
-  height: auto;
-  margin: 1rem 0; /* espaçamento acima e abaixo da imagem */
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-
-/* Links Editar / Voltar */
-.btn-action {
-  display: inline-block;
-  text-decoration: none;
-  color: #006400;
-  font-weight: bold;
-  margin: 0 0.5rem; /* espaço entre os botões */
-  padding: 0.5rem 1rem;
-  border: 1px solid #006400;
-  border-radius: 8px;
-  transition: 0.3s;
-}
-
-.btn-action:hover {
-  background: #228B22;
-  color: white;
-  text-decoration: none;
-}
-/* Container geral (opcional se quiser centralizar tudo melhor) */
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 header {
-  display: flex;
-  justify-content: space-between; 
-  align-items: center;            
-  padding: 0 1rem;
-  height: 60px;
-  border-bottom: 2px solid #ddd;
-  width: 100%;
-  box-sizing: border-box;
-  background: #228B22; 
+    width: 100%;
+    background-color: #2c3e50;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center; /* centraliza logo */
 }
 
-
-.logo-home {
-  display: flex;
-  align-items: center;
-  height: 100%;
+header .logo-home img {
+    height: 50px;
 }
 
-.logo-home img {
-  max-height: 150px;
-  width: auto;
-  display: block;
+.jogador-detail {
+    max-width: 900px;
+    width: 100%;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centraliza todo o conteúdo */
+    text-align: center;  /* centraliza textos */
+}
+
+.jogador-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 3px solid #3498db;
+}
+
+.jogador-nome {
+    margin: 0;
+    font-size: 2rem;
+    color: #2c3e50;
+}
+
+.jogador-actions {
+    margin-top: 10px;
+}
+
+.jogador-actions .btn-action {
+    text-decoration: none;
+    color: #fff;
+    background-color: #3498db;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+}
+
+.jogador-actions .btn-action:hover {
+    background-color: #2980b9;
+}
+
+.jogador-info {
+    margin-top: 20px;
+    font-size: 1rem;
+}
+
+.historico-partidas {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centraliza o bloco inteiro */
+}
+
+.historico-partidas h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.partidas-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centraliza os cards */
+    gap: 15px;
+}
+
+.partida-card {
+    width: 80%;                 /* tamanho do card menor que o container */
+    display: flex;
+    flex-direction: column;      /* imagens em cima, infos embaixo */
+    align-items: center;         /* centraliza tudo dentro do card */
+    text-align: center;
+    background-color: #ecf0f1;
+    padding: 15px 20px;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.partida-card:hover {
+    transform: scale(1.02);
+}
+
+.players {
+    display: flex;
+    justify-content: center; /* centraliza as imagens lado a lado */
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.player-thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #3498db;
+}
+
+.vs-text {
+    font-weight: bold;
+}
+
+.partida-info p {
+    margin: 3px 0;
+}
+
+@media (max-width: 600px) {
+    .partida-card {
+        flex-direction: column; /* card empilha no mobile */
+    }
+
+    .players {
+        justify-content: center;
+    }
 }

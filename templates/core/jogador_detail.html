@@ -1,26 +1,26 @@
-{% extends "core/base.html" %}
 {% load static %}
 
-{% block title %}{{ jogador.nome }} | Truco App{% endblock %}
-
-{% block extra_head %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ jogador.nome }} | Truco App</title>
   <link rel="stylesheet" href="{% static 'css/jogador_detail.css' %}" type="text/css">
-{% endblock %}
+</head>
+<body>
 
-{% block content %}
-  <div class="jogador-detail">
-    <div class="jogador-header">
-      <img src="{{ jogador.imagem_url }}" alt="{{ jogador.nome }}" class="player-img">
-      <h1 class="jogador-nome">{{ jogador.nome }}</h1>
-    </div>
+<!-- Header manual -->
+<header>
+  <a href="{% url 'home' %}" class="logo-home">
+    <img src="{% static 'img/logo.png' %}" alt="TrucoApp Logo">
+  </a>
+</header>
 
-    <div class="jogador-info">
-      <p>Curso: {{ jogador.curso|default:"—" }} — Período: {{ jogador.periodo|default:"—" }}</p>
-      <p>Email: {{ jogador.email|default:"—" }}</p>
-      <p>Vitórias: {{ jogador.vitorias|default:0 }} — Derrotas: {{ jogador.derrotas|default:0 }}</p>
-      <p>Data de Nascimento: {{ jogador.dtNasc|date:"d/m/Y" }}</p>
-    </div>
-
+<div class="jogador-detail">
+  <!-- Jogador principal -->
+  <div class="jogador-header">
+    <img src="{{ jogador.imagem_url }}" alt="{{ jogador.nome }}" class="player-img">
+    <h1 class="jogador-nome">{{ jogador.nome }}</h1>
     <div class="jogador-actions">
       {% if request.user.is_authenticated and request.user.is_staff %}
         <a href="{% url 'jogador_update' jogador.pk %}" class="btn-action">Editar</a>
@@ -28,4 +28,47 @@
       <a href="{% url 'jogador_list' %}" class="btn-action">Voltar</a>
     </div>
   </div>
-{% endblock %}
+
+  <!-- Informações do jogador -->
+  <div class="jogador-info">
+    <p>Curso: {{ jogador.curso|default:"—" }} — Período: {{ jogador.periodo|default:"—" }}</p>
+    <p>Email: {{ jogador.email|default:"—" }}</p>
+    <p>Vitórias: {{ jogador.vitorias|default:0 }} — Derrotas: {{ jogador.derrotas|default:0 }}</p>
+    <p>Data de Nascimento: {{ jogador.dtNasc|date:"d/m/Y" }}</p>
+  </div>
+
+  
+
+
+<div class="historico-partidas">
+  <h2>Histórico de Partidas</h2>
+
+  {% if partidas %}
+
+    <div class="partidas-list">
+      {% for partida in partidas %}
+
+        <div class="partida-card">
+
+          <div class="players">
+            <img src="{{ partida.jogador1.imagem_url }}" alt="{{ partida.jogador1.nome }}" class="player-thumb">
+            <span class="vs-text">vs</span>
+            <img src="{{ partida.jogador2.imagem_url }}" alt="{{ partida.jogador2.nome }}" class="player-thumb">
+          </div>
+
+
+          <div class="partida-info">
+            <p>{{ partida.jogador1.nome }} x {{ partida.jogador2.nome }}</p>
+            <p>Pontos: {{ partida.pontos }}</p>
+            <p>Vencedor: {{ partida.vencedor.nome }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>Este jogador ainda não participou de nenhuma partida.</p>
+  {% endif %}
+</div>
+
+</body>
+</html>

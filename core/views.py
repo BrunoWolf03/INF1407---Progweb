@@ -24,6 +24,15 @@ class JogadorDetailView(DetailView):
     template_name = "core/jogador_detail.html"
     context_object_name = "jogador"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        jogador = self.object
+        # Pega todas as partidas do jogador
+        partidas = Partida.objects.filter(jogador1=jogador) | Partida.objects.filter(jogador2=jogador)
+        partidas = partidas.order_by('-id')  # mais recentes primeiro
+        context['partidas'] = partidas
+        return context
+
 class JogadorCreateView(LoginRequiredMixin, CreateView):
     model = Jogador
     form_class = JogadorForm
